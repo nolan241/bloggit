@@ -26,17 +26,30 @@
       <li><a href="mailto:nolan241@gmail.com">Email</a></li>
     </ul>
     
-   <p class="sign_in">Admin</p>
+    <% if !user_signed_in? %>
+     <p class="sign_in">Admin</p>
+    <% end %>
    
   </div>
   
   <div id="main_content">
       <div id="header">
-        <p>All Posts</p>
+        
+        <% if current_page? (root_path) %>
+            <h2> All Posts </h2>
+          <% elsif current_page? (about_path) %>
+            <h2> About </h2>
+          <% else current_page? (about_path) %>
+            <%= link_to "Back to all posts", root_path %>         
+        <% end %> 
+        
+        <% if user_signed_in? %>
           <div class="buttons">
             <button class="button"><%= link_to "New Post", new_post_path %></button>
             <button class="button">Logout</button>
           </div>
+        <% end %>
+        
       </div>
    
 
